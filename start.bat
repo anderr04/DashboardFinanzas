@@ -5,6 +5,15 @@ echo =========================================
 echo    Arrancando tu Dashboard Financiero...
 echo =========================================
 echo.
+
+if not exist node_modules\ (
+    echo [INFO] Detectado primer inicio. Instalando dependencias necesarias...
+    echo Esto puede tardar uno o dos minutos, ¡paciencia!
+    call npm install
+    echo Dependencias instaladas correctamente.
+    echo.
+)
+
 echo 1. Abriendo tu navegador...
 start http://localhost:3000
 
