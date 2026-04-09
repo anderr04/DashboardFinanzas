@@ -190,7 +190,7 @@ export default function DashboardOverview({ data, marketPrices }: Props) {
         </ResponsiveContainer>
       </div>
 
-      <div className="grid grid-cols-4">
+      <div className="grid" style={{ gridTemplateColumns: "1fr 1fr 1fr", gap: "1.5rem" }}>
         <div className="panel">
           <div className="flex-between text-muted" style={{ marginBottom: "0.75rem" }}>
             <span>Efectivo</span>
@@ -213,14 +213,6 @@ export default function DashboardOverview({ data, marketPrices }: Props) {
             <TrendingUp size={16} />
           </div>
           <div style={{ fontSize: "1.25rem", fontWeight: 600 }}>{formatEuro(totalClasses)}</div>
-        </div>
-
-        <div className="panel" style={{ borderTop: "3px solid var(--accent-negative)" }}>
-          <div className="flex-between text-muted" style={{ marginBottom: "0.75rem" }}>
-            <span>Deuda Activa</span>
-            <CreditCard size={16} />
-          </div>
-          <div style={{ fontSize: "1.25rem", fontWeight: 600 }}>{formatEuro(totalDebts)}</div>
         </div>
       </div>
     </div>

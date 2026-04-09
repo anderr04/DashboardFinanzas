@@ -83,7 +83,12 @@ export async function GET(request: Request) {
         trailingAnnualDividendRate: q.trailingAnnualDividendRate != null ? q.trailingAnnualDividendRate * fxRate : undefined,
         marketCap: q.marketCap != null ? q.marketCap * fxRate : undefined,
         fiftyTwoWeekHigh: q.fiftyTwoWeekHigh != null ? q.fiftyTwoWeekHigh * fxRate : undefined,
-        fiftyTwoWeekLow: q.fiftyTwoWeekLow != null ? q.fiftyTwoWeekLow * fxRate : undefined
+        fiftyTwoWeekLow: q.fiftyTwoWeekLow != null ? q.fiftyTwoWeekLow * fxRate : undefined,
+        earningsDate: q.earningsTimestamp ? new Date(q.earningsTimestamp).toISOString() : undefined,
+        dividendDate: q.dividendDate ? new Date(q.dividendDate).toISOString() : undefined,
+        averageAnalystRating: q.averageAnalystRating || undefined,
+        eps: q.epsTrailingTwelveMonths,
+        forwardPE: q.forwardPE
       };
     });
 

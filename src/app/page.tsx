@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { FinanceData, defaultData, Snapshot } from "@/types/finance";
 import DashboardOverview from "@/components/DashboardOverview";
 import CashSection from "@/components/CashSection";
-import DebtsSection from "@/components/DebtsSection";
 import InvestmentsSection from "@/components/InvestmentsSection";
 import SubscriptionsSection from "@/components/SubscriptionsSection";
 import ClassesSection from "@/components/ClassesSection";
@@ -138,10 +137,6 @@ export default function Home() {
           <Wallet size={20} />
           <span>Efec. y Cuentas</span>
         </div>
-        <div className={`nav-item ${activeTab === 'debts' ? 'active' : ''}`} onClick={() => setActiveTab('debts')}>
-          <CreditCard size={20} />
-          <span>Deuda Pasiva</span>
-        </div>
         <div className={`nav-item ${activeTab === 'classes' ? 'active' : ''}`} onClick={() => setActiveTab('classes')}>
           <BookOpen size={20} />
           <span>Clases Particulares</span>
@@ -158,7 +153,6 @@ export default function Home() {
           {activeTab === 'dashboard' && <DashboardOverview data={data} marketPrices={marketPrices} />}
           {activeTab === 'investments' && <InvestmentsSection investments={data.investments} marketPrices={marketPrices} onChange={inv => handleSave({...data, investments: inv})} />}
           {activeTab === 'cash' && <CashSection cash={data.cash} onChange={c => handleSave({...data, cash: c})} />}
-          {activeTab === 'debts' && <DebtsSection debts={data.debts} onChange={d => handleSave({...data, debts: d})} />}
           {activeTab === 'classes' && <ClassesSection classes={data.classes || []} onChange={cls => handleSave({...data, classes: cls})} />}
           {activeTab === 'subscriptions' && <SubscriptionsSection subscriptions={data.subscriptions} onChange={s => handleSave({...data, subscriptions: s})} />}
         </div>

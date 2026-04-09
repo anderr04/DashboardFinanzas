@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Investment } from "@/types/finance";
 import { Plus, Trash2 } from "lucide-react";
+import AssetModal from "./AssetModal";
 
 interface Props {
   investments: Investment[];
@@ -15,6 +16,7 @@ export default function InvestmentsSection({ investments, marketPrices, onChange
   const [shares, setShares] = useState("");
   const [avgPrice, setAvgPrice] = useState("");
   const [showAdd, setShowAdd] = useState(false);
+  const [selectedAsset, setSelectedAsset] = useState<Investment | null>(null);
 
   const handleAdd = () => {
     if (!symbol || isNaN(Number(shares))) return;
@@ -129,10 +131,15 @@ export default function InvestmentsSection({ investments, marketPrices, onChange
 
           return (
             <div key={inv.id} style={{ display: "flex", flexDirection: "column" }}>
-              <div className="flex-between" style={{ 
-                padding: "1rem 1.5rem 0.5rem 1.5rem", 
-                transition: "background-color 0.2s"
-              }}>
+              <div 
+                className="flex-between" 
+                style={{ 
+                  padding: "1rem 1.5rem 0.5rem 1.5rem", 
+                  transition: "background-color 0.2s",
+                  cursor: "pointer"
+                }}
+                onClick={() => setSelectedAsset(inv)}
+              >
                 <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
                   <div style={{ 
                     width: "40px", height: "40px", borderRadius: "50%", 
@@ -160,7 +167,7 @@ export default function InvestmentsSection({ investments, marketPrices, onChange
                   )}
                 </div>
                 <button 
-                  onClick={() => handleRemove(inv.id)}
+                  onClick={(e) => { e.stopPropagation(); handleRemove(inv.id); }}
                   style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', opacity: 0.5 }}
                 >
                   <Trash2 size={16} />
@@ -184,6 +191,16 @@ export default function InvestmentsSection({ investments, marketPrices, onChange
           );
         })}
       </div>
+
+      {selectedAsset && (
+        <AssetModal
+          symbol={selectedAsset.symbol}
+          shares={selectedAsset.shares}
+          marketData={marketPrices[selectedAsset.symbol]}
+          avgPrice={selectedAsset.averagePrice || 0}
+          onClose={() => setSelectedAsset(null)}
+        />
+      )}
     </div>
   );
 }
