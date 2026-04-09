@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   // Se obtiene la protección solo si las variables privadas existen
   const user = process.env.AUTH_USER;
   const pass = process.env.AUTH_PASS;

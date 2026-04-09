@@ -180,7 +180,7 @@ export default function DashboardOverview({ data, marketPrices }: Props) {
               contentStyle={{ backgroundColor: 'var(--bg-color)', border: '1px solid var(--border-color)', borderRadius: '8px' }}
               itemStyle={{ color: 'var(--text-primary)', fontWeight: 500 }}
               labelFormatter={(label) => formatDateESP(label as string)}
-              formatter={(val: number) => formatEuro(val)}
+              formatter={(val: any) => formatEuro(val)}
             />
             <Area type="monotone" name="Patrimonio Neto" dataKey="netWorth" stroke="var(--accent-positive)" strokeWidth={3} fillOpacity={1} fill="url(#colorNetWorth)" />
             <Area type="monotone" name="Inversiones" dataKey="investmentsValue" stroke="var(--accent-primary)" strokeWidth={3} fillOpacity={1} fill="url(#colorInv)" />

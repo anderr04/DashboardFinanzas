@@ -171,7 +171,7 @@ export default function AssetModal({ symbol, shares, marketData, onClose, avgPri
                 <YAxis domain={[domainMin, domainMax]} hide />
                 <Tooltip 
                   contentStyle={{ backgroundColor: '#1A2332', border: 'none', borderRadius: '12px', color: '#fff', boxShadow: '0 8px 16px rgba(0,0,0,0.4)' }}
-                  formatter={(value: number) => [formatEuro(value), 'Precio'] as any}
+                  formatter={(value: any) => [formatEuro(value), 'Precio'] as any}
                   labelStyle={{ color: '#8892B0', marginBottom: '4px' }}
                 />
                 <Area 
