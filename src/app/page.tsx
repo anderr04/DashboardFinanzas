@@ -91,11 +91,14 @@ export default function Home() {
   const handleSave = async (newData: FinanceData) => {
     setData(newData);
     try {
-      await fetch("/api/db", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newData),
+      const res = await fetch('/api/db', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newData)
       });
+      if (!res.ok) {
+        alert("🚨 ERROR FATAL: No se ha podido guardar en la Nube. (Falta la conexión a Upstash Redis o necesitas hacer Redeploy).");
+      }
       // Optionally requery finance
       if (newData.investments.length > 0) {
         const symbols = newData.investments.map((inv) => inv.symbol).join(",");
