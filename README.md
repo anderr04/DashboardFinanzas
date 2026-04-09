@@ -1,34 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Premium Finance Dashboard
 
-## Getting Started
+A beautiful, fully private, and self-hosted personal finance tracking dashboard built with Next.js 16. It empowers you to track your Net Worth, Cash, Assets, Subscriptions, and side-hustles in one clean interface reminiscent of professional institutional tools like the Bloomberg Terminal.
 
-First, run the development server:
+![Dashboard Preview](https://via.placeholder.com/1200x600.png?text=Dashboard+Preview)
+
+## ✨ Features
+
+- **Total Wealth Aggregation**: Real-time Net Worth calculation merging cash, assets, and active cash flows.
+- **Deep Asset Insights**: Integration with Yahoo Finance via server actions. Click any asset to open a deep-dive modal featuring historical charts (1M, 3M, 1Y, 3Y), real-time Euro-converted quotes, P/E ratios, Ex-Dividend / Earnings Calendar, and Analyst Ratings.
+- **Privacy First Approach**: All data is strictly yours. Kept locally in a single invisible `.json` or strictly within a serverless Upstash KV namespace. No third-party accounts required.
+- **Advanced Basic Auth**: Completely invisible to intruders. Deployed behind an Edge Proxy that intercepts requests and enforces Basic Authentication before rendering any React code.
+- **Smart Cloud Adaptation**: The backend dynamically detects if it's running locally (writing to system storage) or on a cloud provider like Vercel (writing to an Upstash Redis KV instance).
+
+---
+
+## 🛠 Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Styling**: Vanilla CSS (CSS Modules & Global tokens)
+- **Charts**: Recharts
+- **Icons**: Lucide React
+- **Market Data Engine**: Yahoo Finance API v2
+- **Cloud Storage**: Upstash Redis (Vercel KV)
+
+---
+
+## 🚀 Getting Started
+
+If you wish to host your own instance or run it locally, follow these steps.
+
+### 1. Local Development (Offline Mode)
+
+Simply clone the repository and run the startup batch script. The application will automatically install dependencies and initialize a local database (`finanzas_db.json`).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yourusername/DashboardFinanzas.git
+cd DashboardFinanzas
+./start.bat
 ```
+*(The local DB file is automatically ignored by `.gitignore` to prevent leaking your financial data to GitHub).*
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Cloud Deployment (Vercel / Production Mode)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This dashboard is designed to instantly deploy to Vercel with zero friction.
 
-## Learn More
+1. Fork or Import this repository into **Vercel**.
+2. Before deploying, configure your Edge Security variables under the **Environment Variables** tab:
+   - `AUTH_USER`: `your_secure_username`
+   - `AUTH_PASS`: `your_secure_password`
+3. Hit **Deploy**.
+4. To enable save-persistence in the cloud, attach a free **Upstash Redis** database to the project via the Vercel Storage tab. Vercel will automatically inject the required `KV_REST_API_URL` and `KV_REST_API_TOKEN` tokens. 
+5. Redeploy your project. You now have a 100% private financial tracker accessible globally.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔒 Security Posture
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Edge Authorization**: Access is gated at the Next.js `proxy.ts` execution layer. Intruders are blocked via an HTTP 401 response and never reach the application bundles.
+- **Zero Config Leakage**: `.env` and `finanzas_db.json` are strictly untracked. A `.env.example` is provided for template configuration.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🤝 Contribution
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/yourusername/DashboardFinanzas/issues).
