@@ -182,6 +182,7 @@ export default function InvestmentsSection({ investments, marketPrices, onChange
               display: "flex", gap: "1.5rem",
               fontSize: "0.8rem", color: "var(--text-secondary)"
             }}>
+              {inv.averagePrice != null && inv.averagePrice > 0 && <span>P. Medio: <span style={{color: "var(--text-primary)"}}>{formatEuro(inv.averagePrice)}</span></span>}
               {market?.trailingPE && <span>P/E: <span style={{color: "var(--text-primary)"}}>{market.trailingPE.toFixed(2)}</span></span>}
               {market?.dividendRate && <span>Dividendo: <span style={{color: "var(--accent-positive)"}}>{formatEuro(market.dividendRate * inv.shares)} / año</span></span>}
               {market?.fiftyTwoWeekHigh != null && <span>52w High: <span style={{color: "var(--text-primary)"}}>{market.fiftyTwoWeekHigh.toFixed(2)}</span></span>}
