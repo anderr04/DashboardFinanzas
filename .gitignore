@@ -44,3 +44,4 @@ next-env.d.ts
 # Personal Files
 finanzas_db.json
 scratch/
+*.pdf
